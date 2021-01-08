@@ -20,6 +20,6 @@ export { DropDown } from './dropDown';
 export { Modal } from './modal';
 export { Pill } from './pill';
 export { Popup, PLACEMENT } from './popup';
-export * as Snackbar from './snackbar';
+export { Snackbar } from './snackbar';
 export * from './tooltip';
 export { Text, Display, Headline } from './typography';
