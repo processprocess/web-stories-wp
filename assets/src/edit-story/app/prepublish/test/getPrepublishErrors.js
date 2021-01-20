@@ -82,10 +82,8 @@ describe('prepublish checklist', () => {
     });
     jest.doMock('../warning', () => {
       const actual = jest.requireActual('../warning').default;
-      const async = jest.requireActual('../warning').async;
       return {
         ...actual,
-        async,
         story: [...actual.story, mockFn],
         page: [...actual.page, mockFn],
         image: [...actual.image, mockFn],
@@ -103,9 +101,15 @@ describe('prepublish checklist', () => {
     }).not.toThrow();
     expect(mockFn).toHaveBeenCalledWith(malformedStory);
     expect(mockFn).toHaveBeenCalledTimes(3);
-    expect(await getPrepublishErrorsCopy(malformedStory)).toStrictEqual(
-      await getPrepublishErrors(malformedStory)
-    );
+    const copyTest = await getPrepublishErrorsCopy(malformedStory);
+    const test = await getPrepublishErrors(malformedStory);
+    expect(test).toHaveLength(copyTest.length);
+    // expect(test[0].message).toStrictEqual(copyTest[0])
+    test.forEach((obj, index) => {
+      expect(obj.message).toStrictEqual(copyTest[index].message);
+      expect(obj.help).toStrictEqual(copyTest[index].help);
+      expect(obj.type).toStrictEqual(copyTest[index].type);
+    });
   });
 
   it('should provide the page number where the element that needs guidance is', async () => {
