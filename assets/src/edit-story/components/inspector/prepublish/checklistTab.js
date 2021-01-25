@@ -165,8 +165,8 @@ function annotateNumber(number) {
 const ChecklistTab = (props) => {
   const { checklist } = props;
 
-  const { onPrepublishSelect } = useHighlights(({ onPrepublishSelect }) => ({
-    onPrepublishSelect,
+  const { setHighlights } = useHighlights(({ setHighlights }) => ({
+    setHighlights,
   }));
 
   const { highPriority, recommended, pages } = useMemo(
@@ -223,10 +223,30 @@ const ChecklistTab = (props) => {
     [checklist]
   );
 
+  const getOnPrepublishSelect = useCallback(
+    (args) => {
+      const { elements, elementId, pageId, highlight } = args;
+      if (!elements && !elementId && !pageId && !highlight) {
+        return {};
+      }
+
+      return {
+        onClick: () => setHighlights(args),
+        onKeyDown: (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            setHighlights(args);
+          }
+        },
+      };
+    },
+    [setHighlights]
+  );
+
   const renderRow = useCallback(
     (args) => {
       const { id, message, help, pageGroup } = args;
-      const onPrepublish = onPrepublishSelect(args);
+      const onPrepublish = getOnPrepublishSelect(args);
       const accessibleText = __('Select offending element', 'web-stories');
       return (
         <Row {...onPrepublish} tabIndex={0} key={id} pageGroup={pageGroup}>
@@ -242,7 +262,7 @@ const ChecklistTab = (props) => {
         </Row>
       );
     },
-    [onPrepublishSelect]
+    [getOnPrepublishSelect]
   );
 
   const renderPageGroupedRow = useCallback(
