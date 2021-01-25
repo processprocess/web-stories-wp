@@ -5,26 +5,48 @@ Array [
   Object {
     "help": "Used as the cover for the Story and is representative of the story. Should not have the Story title pre-embedded on it or any other burned-in text. Should be at least 640x853px in size and maintain a 3:4 aspect ratio.",
     "highlight": Object {
-      "document": Object {
-        "cover": Object {
-          "css": Array [
-            "position:relative;&:after{display:block;position:absolute;top:-10px;right:-10px;bottom:-10px;left:-10px;content:'';background-color:",
-            [Function],
-            ";opacity:0;pointer-events:none;",
-            "
-  animation: flash 0.25s ease-out 3;
+      "cover": Object {
+        "animation": Array [
+          "box-shadow:0 0 0 2px ",
+          [Function],
+          ";",
+          " ",
+          "
+  opacity: 1;
+  animation: flash 1s ease-in-out 4;
 ",
-            "}",
-            "
-@keyframes flash {
-  50% {
-    opacity: 50%;
+        ],
+        "focusContainerCss": Array [
+          "position:relative;",
+          "&:focus-within::after",
+          "{display:block;position:absolute;top:0;right:0;left:0;bottom:0;content:'';pointer-events:none;",
+          "box-shadow:0 0 0 2px ",
+          [Function],
+          ";",
+          " ",
+          "
+  opacity: 1;
+  animation: flash 1s ease-in-out 4;
+",
+          "}",
+          "
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
   }
-}
 ",
-          ],
-        },
+        ],
+        "focusContainerSelector": "&:focus-within::after",
+        "keyframes": "
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
+  }
+",
       },
+      "tab": "document",
     },
     "message": "Missing story cover image",
     "storyId": 120,
@@ -34,23 +56,45 @@ Array [
     "help": "Keep the title clear and clean, ideally under 10 words in less than 40 characters.",
     "highlight": Object {
       "storyTitle": Object {
-        "css": Array [
-          "position:relative;&:after{display:block;position:absolute;top:-10px;right:-10px;bottom:-10px;left:-10px;content:'';background-color:",
+        "animation": Array [
+          "box-shadow:0 0 0 2px ",
           [Function],
-          ";opacity:0;pointer-events:none;",
+          ";",
+          " ",
           "
-  animation: flash 0.25s ease-out 3;
+  opacity: 1;
+  animation: flash 1s ease-in-out 4;
+",
+        ],
+        "focusContainerCss": Array [
+          "position:relative;",
+          "&:focus-within::after",
+          "{display:block;position:absolute;top:0;right:0;left:0;bottom:0;content:'';pointer-events:none;",
+          "box-shadow:0 0 0 2px ",
+          [Function],
+          ";",
+          " ",
+          "
+  opacity: 1;
+  animation: flash 1s ease-in-out 4;
 ",
           "}",
           "
-@keyframes flash {
-  50% {
-    opacity: 50%;
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
   }
-}
 ",
         ],
-        "focus": true,
+        "focusContainerSelector": "&:focus-within::after",
+        "keyframes": "
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
+  }
+",
       },
     },
     "message": "Missing story title",
@@ -60,27 +104,48 @@ Array [
   Object {
     "help": "Add a Story Description in the Document panel.",
     "highlight": Object {
-      "document": Object {
-        "excerpt": Object {
-          "css": Array [
-            "position:relative;&:after{display:block;position:absolute;top:-10px;right:-10px;bottom:-10px;left:-10px;content:'';background-color:",
-            [Function],
-            ";opacity:0;pointer-events:none;",
-            "
-  animation: flash 0.25s ease-out 3;
+      "excerpt": Object {
+        "animation": Array [
+          "box-shadow:0 0 0 2px ",
+          [Function],
+          ";",
+          " ",
+          "
+  opacity: 1;
+  animation: flash 1s ease-in-out 4;
 ",
-            "}",
-            "
-@keyframes flash {
-  50% {
-    opacity: 50%;
+        ],
+        "focusContainerCss": Array [
+          "position:relative;",
+          "&:focus-within::after",
+          "{display:block;position:absolute;top:0;right:0;left:0;bottom:0;content:'';pointer-events:none;",
+          "box-shadow:0 0 0 2px ",
+          [Function],
+          ";",
+          " ",
+          "
+  opacity: 1;
+  animation: flash 1s ease-in-out 4;
+",
+          "}",
+          "
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
   }
-}
 ",
-          ],
-          "focus": true,
-        },
+        ],
+        "focusContainerSelector": "&:focus-within::after",
+        "keyframes": "
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
+  }
+",
       },
+      "tab": "document",
     },
     "message": "Missing Story Description",
     "storyId": 120,
@@ -88,54 +153,12 @@ Array [
   },
   Object {
     "help": "Use between 4 and 30 pages in your story.",
-    "highlight": Object {
-      "pageMenu": Object {
-        "css": Array [
-          "position:relative;&:after{display:block;position:absolute;top:-10px;right:-10px;bottom:-10px;left:-10px;content:'';background-color:",
-          [Function],
-          ";opacity:0;pointer-events:none;",
-          "
-  animation: flash 0.25s ease-out 3;
-",
-          "}",
-          "
-@keyframes flash {
-  50% {
-    opacity: 50%;
-  }
-}
-",
-        ],
-      },
-    },
     "message": "Story too short",
     "storyId": 120,
     "type": "guidance",
   },
   Object {
     "help": "The entire story should have a minimum of 100 characters of text in total.",
-    "highlight": Object {
-      "tab": Object {
-        "text": Object {
-          "css": Array [
-            "position:relative;&:after{display:block;position:absolute;top:-10px;right:-10px;bottom:-10px;left:-10px;content:'';background-color:",
-            [Function],
-            ";opacity:0;pointer-events:none;",
-            "
-  animation: flash 0.25s ease-out 3;
-",
-            "}",
-            "
-@keyframes flash {
-  50% {
-    opacity: 50%;
-  }
-}
-",
-          ],
-        },
-      },
-    },
     "message": "Too little text",
     "storyId": 120,
     "type": "guidance",
