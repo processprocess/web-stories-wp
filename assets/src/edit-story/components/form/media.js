@@ -200,7 +200,7 @@ function MediaInput({
     rest.isFocused && buttonRef.current?.focus();
   });
 
-  useFocusOut(buttonRef, onBlur);
+  useFocusOut(buttonRef, rest.onFocusOut);
 
   return (
     <Container
