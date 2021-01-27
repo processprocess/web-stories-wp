@@ -1,0 +1,68 @@
+name: Deploy plugin to WordPress.org
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  deploy:
+    name: Deploy plugin
+    runs-on: ubuntu-latest
+    environment: Production
+    if: github.event.release.assets[0]
+    env:
+      PLUGIN_REPO_URL: 'https://plugins.svn.wordpress.org/web-stories'
+      STABLE_TAG_REGEX: 'Stable tag:\s*(.+)'
+      SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+      SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+      VERSION: ${{ github.event.release.name }}
+
+    steps:
+      - name: Check out trunk folder
+        run: svn checkout "$PLUGIN_REPO_URL/trunk"
+
+      - name: Get previous stable tag
+        id: get_previous_stable_tag
+        run: echo ::set-output name=stable_tag::$(grep "$STABLE_TAG_REGEX" ./trunk/readme.txt)
+
+      - name: Delete everything
+        working-directory: ./trunk
+        run: find . -maxdepth 1 -not -name ".svn" -not -name "." -not -name ".." -exec rm -rf {} +
+
+      - name: Download and unzip release asset into trunk
+        env:
+          PLUGIN_URL: ${{ github.event.release.assets[0].browser_download_url }}
+        run: |
+          curl -L -o web-stories.zip $PLUGIN_URL
+          unzip web-stories.zip -d trunk
+          rm web-stories.zip
+
+      - name: Replace stable tag placeholder with pre-existing stable tag
+        run: |
+          sed -i "s/${STABLE_TAG_REGEX}/Stable tag: ${STABLE_TAG}/g" ./readme.txt
+        env:
+          STABLE_TAG: ${{ steps.get_previous_stable_tag.outputs.stable_tag }}
+
+      - name: Commit the content changes
+        working-directory: ./trunk
+        run: |
+          svn st | grep '^?' | awk '{print $2}' | xargs -r svn add
+          svn st | grep '^!' | awk '{print $2}' | xargs -r svn rm
+          svn commit -m "Committing version $VERSION" \
+           --no-auth-cache --non-interactive  --username "$SVN_USERNAME" --password "$SVN_PASSWORD"
+
+      # This will trigger an email confirmation that needs to be confirmed.
+
+      - name: Create the SVN tag
+        working-directory: ./trunk
+        run: |
+          svn copy "$PLUGIN_REPO_URL/trunk" "$PLUGIN_REPO_URL/tags/$VERSION" -m "Tagging version $VERSION" \
+           --no-auth-cache --non-interactive  --username "$SVN_USERNAME" --password "$SVN_PASSWORD"
+
+      - name: Update stable tag
+        working-directory: ./trunk
+        run: |
+          sed -i "s/${STABLE_TAG_REGEX}/Stable tag: ${VERSION}/g" ./readme.txt
+          svn commit -m "Releasing version $VERSION" \
+           --no-auth-cache --non-interactive  --username "$SVN_USERNAME" --password "$SVN_PASSWORD"
