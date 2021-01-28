@@ -4,149 +4,21 @@ exports[`prepublish checklist should return guidance for the story 1`] = `
 Array [
   Object {
     "help": "Used as the cover for the Story and is representative of the story. Should not have the Story title pre-embedded on it or any other burned-in text. Should be at least 640x853px in size and maintain a 3:4 aspect ratio.",
-    "highlight": Object {
-      "cover": Object {
-        "animation": Array [
-          "box-shadow:0 0 0 2px ",
-          [Function],
-          ";",
-          " ",
-          "
-  opacity: 1;
-  animation: flash 1s ease-in-out 4;
-",
-        ],
-        "focusContainerCss": Array [
-          "position:relative;",
-          "&:focus-within::after",
-          "{display:block;position:absolute;top:0;right:0;left:0;bottom:0;content:'';pointer-events:none;",
-          "box-shadow:0 0 0 2px ",
-          [Function],
-          ";",
-          " ",
-          "
-  opacity: 1;
-  animation: flash 1s ease-in-out 4;
-",
-          "}",
-          "
-  @keyframes flash {
-    50% {
-      opacity: 0;
-    }
-  }
-",
-        ],
-        "focusContainerSelector": "&:focus-within::after",
-        "keyframes": "
-  @keyframes flash {
-    50% {
-      opacity: 0;
-    }
-  }
-",
-      },
-      "tab": "document",
-    },
+    "highlight": "COVER",
     "message": "Missing story cover image",
     "storyId": 120,
     "type": "error",
   },
   Object {
     "help": "Keep the title clear and clean, ideally under 10 words in less than 40 characters.",
-    "highlight": Object {
-      "storyTitle": Object {
-        "animation": Array [
-          "box-shadow:0 0 0 2px ",
-          [Function],
-          ";",
-          " ",
-          "
-  opacity: 1;
-  animation: flash 1s ease-in-out 4;
-",
-        ],
-        "focusContainerCss": Array [
-          "position:relative;",
-          "&:focus-within::after",
-          "{display:block;position:absolute;top:0;right:0;left:0;bottom:0;content:'';pointer-events:none;",
-          "box-shadow:0 0 0 2px ",
-          [Function],
-          ";",
-          " ",
-          "
-  opacity: 1;
-  animation: flash 1s ease-in-out 4;
-",
-          "}",
-          "
-  @keyframes flash {
-    50% {
-      opacity: 0;
-    }
-  }
-",
-        ],
-        "focusContainerSelector": "&:focus-within::after",
-        "keyframes": "
-  @keyframes flash {
-    50% {
-      opacity: 0;
-    }
-  }
-",
-      },
-    },
+    "highlight": "STORY_TITLE",
     "message": "Missing story title",
     "storyId": 120,
     "type": "error",
   },
   Object {
     "help": "Add a Story Description in the Document panel.",
-    "highlight": Object {
-      "excerpt": Object {
-        "animation": Array [
-          "box-shadow:0 0 0 2px ",
-          [Function],
-          ";",
-          " ",
-          "
-  opacity: 1;
-  animation: flash 1s ease-in-out 4;
-",
-        ],
-        "focusContainerCss": Array [
-          "position:relative;",
-          "&:focus-within::after",
-          "{display:block;position:absolute;top:0;right:0;left:0;bottom:0;content:'';pointer-events:none;",
-          "box-shadow:0 0 0 2px ",
-          [Function],
-          ";",
-          " ",
-          "
-  opacity: 1;
-  animation: flash 1s ease-in-out 4;
-",
-          "}",
-          "
-  @keyframes flash {
-    50% {
-      opacity: 0;
-    }
-  }
-",
-        ],
-        "focusContainerSelector": "&:focus-within::after",
-        "keyframes": "
-  @keyframes flash {
-    50% {
-      opacity: 0;
-    }
-  }
-",
-      },
-      "tab": "document",
-    },
+    "highlight": "EXCERPT",
     "message": "Missing Story Description",
     "storyId": 120,
     "type": "warning",
