@@ -151,7 +151,9 @@ function storyReducer(state, action) {
     case ACTION_TYPES.FETCH_STORIES_SUCCESS: {
       const fetchedStoriesById = [];
       const reshapedStories = action.payload.stories.reduce((acc, current) => {
-        if (!current) {
+        // Hardening in case data returned by the server is malformed.
+        // For example, story_data could be missing.
+        if (!current || !current?.story_data?.length) {
           return acc;
         }
         fetchedStoriesById.push(current.id);
